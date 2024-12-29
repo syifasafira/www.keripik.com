@@ -8,7 +8,7 @@ class Model_pesanan extends CI_Model
       $this->db->join('tabel_pelanggan', 'tabel_pesanan.id_pelanggan = tabel_pelanggan.id_pelanggan');
       $this->db->join('tabel_produk', 'tabel_pesanan.id_produk = tabel_produk.id_produk');
       $query = $this->db->get();
-      return $query; // Jika menggunakan foreach, harus return sebagai objek query
+      return $query;  // Jika menggunakan foreach, harus return sebagai objek query
    }
 
    public function insert_pesanan($data)
@@ -16,12 +16,15 @@ class Model_pesanan extends CI_Model
       $this->db->insert('tabel_pesanan', $data);
    }
 
-   public function get_pesanan_by_id($id_pesanan)
+   public function get_one($id_pesanan)
    {
-      $this->db->where('id_pesanan', $id_pesanan);
-      $query = $this->db->get('tabel_pesanan');
-      return $query->row();
+      $this->db->select('tabel_pesanan.id_pesanan, tabel_pesanan.id_pelanggan, tabel_pesanan.id_produk, tabel_pesanan.jumlah, tabel_pelanggan.nama_pelanggan');
+      $this->db->from('tabel_pesanan');
+      $this->db->join('tabel_pelanggan', 'tabel_pesanan.id_pelanggan = tabel_pelanggan.id_pelanggan');
+      $this->db->where('tabel_pesanan.id_pesanan', $id_pesanan);
+      return $this->db->get(); // Tetap return object agar fleksibel
    }
+
 
    public function update_pesanan($id_pesanan, $data)
    {

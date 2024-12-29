@@ -17,8 +17,8 @@
             <td><?php echo $r->nama_pelanggan; ?></td>
             <td><?php echo $r->nama_produk; ?></td>
             <td><?php echo $r->jumlah; ?></td>
-            <td><a href="<?php echo base_url() . 'index.php/pesanan/edit/' . $r->id_pesanan ?>">Edit</a></td>
-            <td><a href="<?php echo base_url() . 'index.php/pesanan/delete/' . $r->id_pesanan ?>">Delete</a></td>
+            <td><a href="<?php echo base_url() . 'pesanan/edit/' . $r->id_pesanan ?>">Edit</a></td>
+            <td><a href="<?php echo base_url() . 'pesanan/delete/' . $r->id_pesanan ?>">Delete</a></td>
         </tr>
     <?php $no++;
             } ?>

@@ -11,9 +11,14 @@ class Pesanan extends CI_Controller
 
     public function index()
     {
+        $data['title'] = 'Data Pesanan';
         $data['record'] = $this->Model_pesanan->get_all_pesanan();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar', $data);
         $this->load->view('pesanan/lihat_data', $data);
+        $this->load->view('templates/footer');
     }
+
     public function tambah()
     {
         $data['pelanggan'] = $this->Model_pesanan->get_all_pelanggan();
@@ -28,39 +33,37 @@ class Pesanan extends CI_Controller
             $this->Model_pesanan->insert_pesanan($input);
             redirect('pesanan');
         } else {
+            $data['title'] = 'Tambah Data Pesanan';
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar', $data);
             $this->load->view('pesanan/form_input', $data);
+            $this->load->view('templates/footer');
         }
     }
 
-    public function edit($id_pesanan = null)
+    public function edit()
     {
-        // Validasi jika ID pesanan tidak ada
-        if (!$id_pesanan) {
-            redirect('pelanggan'); // Redirect ke halaman utama pelanggan jika ID tidak valid
-        }
+        $id_pesanan = $this->uri->segment(3);
+        $data['record'] = $this->Model_pesanan->get_one($id_pesanan)->row_array(); // Data sebagai array
+        $data['produk'] = $this->Model_pesanan->get_all_produk(); // Semua produk untuk dropdown
 
-        // Ambil data pesanan berdasarkan ID
-        $data['record'] = $this->Model_pesanan->get_pesanan_by_id($id_pesanan);
-        if (!$data['record']) {
-            show_404(); // Tampilkan 404 jika data tidak ditemukan
-        }
-
-        // Ambil data produk untuk dropdown
-        $data['produk'] = $this->Model_pesanan->get_all_produk();
-
-        // Jika form di-submit
+        // Jika form disubmit
         if ($this->input->method() === 'post') {
             $input = [
                 'id_produk' => $this->input->post('id_produk'),
                 'jumlah'    => $this->input->post('jumlah'),
             ];
 
-            // Update data di database
+            // Update data pesanan
             $this->Model_pesanan->update_pesanan($id_pesanan, $input);
-            redirect('pesanan'); // Redirect ke halaman utama pelanggan
+            redirect('pesanan'); // Redirect ke halaman utama
         }
 
         // Load view form edit
-        $this->load->view('pesanan/form_edit', $data);
+        $data['title'] = 'Edit Data Pesanan';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('modal/form_edit', $data);
+        $this->load->view('templates/footer');
     }
 }

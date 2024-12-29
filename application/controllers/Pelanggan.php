@@ -8,8 +8,12 @@ class pelanggan extends CI_Controller
     }
     function index()
     {
+        $data['title'] = 'Data Pelanggan';
         $data['record'] = $this->model_pelanggan->tampilkan_data();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar', $data);
         $this->load->view('pelanggan/lihat_data', $data);
+        $this->load->view('templates/footer');
     }
     function tambah()
     {
@@ -17,7 +21,11 @@ class pelanggan extends CI_Controller
             $this->model_pelanggan->tambah();
             redirect('pelanggan');
         } else {
-            $this->load->view('pelanggan/form_input');
+            $data['title'] = 'Tambah Data Pelanggan';
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar', $data);
+            $this->load->view('pelanggan/form_input', $data);
+            $this->load->view('templates/footer');
         }
     }
     function edit()
@@ -26,9 +34,13 @@ class pelanggan extends CI_Controller
             $this->model_pelanggan->edit();
             redirect('pelanggan');
         } else {
+            $data['title'] = 'Edit Data Pelanggan';
             $id = $this->uri->segment(3);
             $data['record'] = $this->model_pelanggan->get_one($id)->row_array();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar', $data);
             $this->load->view('pelanggan/form_edit', $data);
+            $this->load->view('templates/footer');
         }
     }
     function delete()

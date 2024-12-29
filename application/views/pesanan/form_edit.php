@@ -1,48 +1,39 @@
-<h3>Edit Data Pelanggan</h3>
-<?php
-echo form_open('pelanggan/edit');
-?>
-<input type="hidden" value="<?php echo $record['id_pesanan'] ?>"
-    name="id_pesanan">
-<table border="1">
+<h3>Edit Data Pesanan</h3>
+<?php echo form_open('pesanan/edit/' . $record['id_pesanan']); ?>
+<input type="hidden" name="id_pesanan" value="<?php echo $record['id_pesanan']; ?>">
 
-    <td>Nama Pelanggan</td>
-    <td>
-        <input type="date" name="nama_pelanggan" placeholder="nama pelanggan"
-            value="<?php echo $record['nama_pelanggan'] ?>" readonly>
-    </td>
+<table border="1">
+    <tr>
+        <td>Nama Pelanggan</td>
+        <td>
+            <input type="text" name="nama_pelanggan"
+                value="<?php echo $record['nama_pelanggan']; ?>" readonly>
+        </td>
     </tr>
     <tr>
         <td>Nama Produk</td>
-        <td><select name="id_produk" class="form-control">
-                <?php foreach ($rec_prodi->result() as $rp) {
-                ?>
-                    <option <?php if ($rec_mahasiswa['id_produk'] == $rp->id_produk) {
-                                echo 'selected';
-                            } ?>
-                        value="<?php echo $rp->id_produk ?>"><?php echo $rp->nama_produk ?></option>;
-                <?php
-                }
-                ?>
+        <td>
+            <select name="id_produk" required>
+                <?php foreach ($produk as $p): ?>
+                    <option value="<?php echo $p->id_produk; ?>"
+                        <?php echo ($p->id_produk == $record['id_produk']) ? 'selected' : ''; ?>>
+                        <?php echo $p->nama_produk; ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
         </td>
     </tr>
-    <td>Jumlah</td>
-    <td>
-        <input type="text" name="jumlah" placeholder="jumlah"
-            value="<?php echo $record['jumlah'] ?>">
-    </td>
-    </tr>
     <tr>
-        <td colspan="2"><br></td>
+        <td>Jumlah</td>
+        <td>
+            <input type="number" name="jumlah" value="<?php echo $record['jumlah']; ?>" required>
+        </td>
     </tr>
     <tr>
         <td colspan="2">
-            <button type="submit" name="submit">
-                Simpan
-            </button>
-            <?php echo anchor('pelanggan', 'Kembali') ?>
+            <button type="submit" name="submit">Simpan</button>
+            <?php echo anchor('pesanan', 'Kembali'); ?>
         </td>
     </tr>
 </table>
-</form>
+<?php echo form_close(); ?>
