@@ -6,8 +6,10 @@ class Produk extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        check_logged_in();
         $this->load->model('Model_produk');
     }
+
 
     public function index()
     {

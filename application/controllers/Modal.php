@@ -1,9 +1,10 @@
 <?php
 class modal extends CI_Controller
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
+        check_logged_in();
         $this->load->model('model_modal');
     }
     function index()

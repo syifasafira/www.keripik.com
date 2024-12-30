@@ -25,9 +25,9 @@
                     <a class="nav-link active" aria-current="page" href="<?= base_url('transaksi'); ?>">Transaksi</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <button class="btn btn-outline-secondary" type="submit">Logout</button>
-            </form>
+            <li class="nav-item">
+                <a class="btn btn-danger" href="<?= base_url('auth/logout'); ?>">Logout</a>
+            </li>
         </div>
     </div>
 </nav>

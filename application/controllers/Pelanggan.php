@@ -1,11 +1,13 @@
 <?php
 class pelanggan extends CI_Controller
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
+        check_logged_in();
         $this->load->model('model_pelanggan');
     }
+
     function index()
     {
         $data['title'] = 'Data Pelanggan';
