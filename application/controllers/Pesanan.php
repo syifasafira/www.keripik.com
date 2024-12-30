@@ -63,7 +63,7 @@ class Pesanan extends CI_Controller
         $data['title'] = 'Edit Data Pesanan';
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar', $data);
-        $this->load->view('modal/form_edit', $data);
+        $this->load->view('pesanan/form_edit', $data);
         $this->load->view('templates/footer');
     }
 }

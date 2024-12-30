@@ -12,12 +12,14 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="<?= base_url('modal'); ?>">Modal</a>
                 </li>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="<?= base_url('produk'); ?>">Produk</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="<?= base_url('pelanggan'); ?>">Pelanggan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="<?= base_url('pesanan'); ?>">Pesanan</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="<?= base_url('transaksi'); ?>">Transaksi</a>
