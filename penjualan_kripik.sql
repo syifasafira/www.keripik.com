@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 30, 2024 at 07:42 AM
+-- Generation Time: Jan 01, 2025 at 04:06 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -39,10 +39,8 @@ CREATE TABLE `tabel_pelanggan` (
 --
 
 INSERT INTO `tabel_pelanggan` (`id_pelanggan`, `nama_pelanggan`, `no_telepon`, `alamat`) VALUES
-(1, 'syifa', '8764376', 'punjot'),
-(2, 'puput', '56789', 'punjot'),
-(3, 'ilham', '56789', 'BIREUEN'),
-(10, 'Ilham', '56789', 'punjot');
+(1, 'syifa', '8764376', 'BIREUEN'),
+(3, 'ilham', '56789', 'BIREUENn');
 
 -- --------------------------------------------------------
 
@@ -62,9 +60,9 @@ CREATE TABLE `tabel_pesanan` (
 --
 
 INSERT INTO `tabel_pesanan` (`id_pesanan`, `id_pelanggan`, `id_produk`, `jumlah`) VALUES
-(1, 1, 1, 10),
-(2, 2, 2, 60),
-(5, 2, 2, 50);
+(1, 1, 2, 100),
+(2, 2, 2, 20),
+(7, 1, 1, 100);
 
 -- --------------------------------------------------------
 
@@ -84,11 +82,9 @@ CREATE TABLE `tabel_produk` (
 --
 
 INSERT INTO `tabel_produk` (`id_produk`, `stok`, `harga_jual`, `nama_produk`) VALUES
-(1, 50, 30000, 'kripik singkong orijinal'),
-(2, 50, 30000, 'kripik singkong rasa jagung'),
-(3, 100, 40000, 'kripik singkong rasa balado'),
-(4, 60, 40000, 'kripik pisang orijinal'),
-(5, 60, 40000, 'kripik pisang manis');
+(1, 60, 3000, 'kripik singkong orijinal'),
+(2, 60, 30000, 'kripik singkong rasa jagung'),
+(3, 100, 40000, 'kripik singkong rasa balado');
 
 -- --------------------------------------------------------
 
@@ -114,8 +110,7 @@ INSERT INTO `tabel_transaksi` (`id_transaksi`, `id_pesanan`, `total_harga`, `tan
 (2, 2, 70000, '2024-12-02', 'cod', 'belum'),
 (3, 3, 40000, '2024-12-03', 'case', 'sudah'),
 (4, 4, 50000, '2024-12-04', 'case', 'sudah'),
-(5, 5, 60000, '2024-12-05', 'transfer', 'belum'),
-(6, 1, 20, '2024-12-04', 'cod', 'belum');
+(5, 5, 60000, '2024-12-05', 'transfer', 'sudah');
 
 -- --------------------------------------------------------
 
@@ -135,9 +130,11 @@ CREATE TABLE `tb_modal` (
 --
 
 INSERT INTO `tb_modal` (`id_modal`, `tanggal`, `jumlah_modal`, `keterangan`) VALUES
-(3, '2024-12-04', '100000', 'modal baru'),
-(4, '2024-12-04', '1000', 'modal baru'),
-(6, '2024-12-27', '2000000', 'modal baru');
+(3, '2024-12-04', '1000', 'modal baru'),
+(6, '2024-12-27', '2000000', 'modal baru'),
+(8, '2024-12-13', '100', 'keripik'),
+(9, '2024-12-26', '200', 'gaji'),
+(10, '2025-01-10', '50000', 'modal baru');
 
 -- --------------------------------------------------------
 
@@ -156,7 +153,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(1, 'cipa', '$2y$10$sZmIMkyZE3wOEH3kVs5M8uJGIoMqr4EZYLQOl6sz1K15I2F3Ea96i');
+(1, 'cipa', '$2y$10$sZmIMkyZE3wOEH3kVs5M8uJGIoMqr4EZYLQOl6sz1K15I2F3Ea96i'),
+(2, 'puput', '$2y$10$SPoOkujsSvtWp78A8asLZO.oww5NtmAFEHpyJDb1ARHkx7y7re9IG'),
+(3, 'fira', '$2y$10$TLMuydMTlucmB6tPIWKSu.hbQFAw/1wYrpill7fpdrvllDN6zmiiu');
 
 --
 -- Indexes for dumped tables
@@ -206,13 +205,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tabel_pelanggan`
 --
 ALTER TABLE `tabel_pelanggan`
-  MODIFY `id_pelanggan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_pelanggan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tabel_pesanan`
 --
 ALTER TABLE `tabel_pesanan`
-  MODIFY `id_pesanan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pesanan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tabel_produk`
@@ -224,19 +223,19 @@ ALTER TABLE `tabel_produk`
 -- AUTO_INCREMENT for table `tabel_transaksi`
 --
 ALTER TABLE `tabel_transaksi`
-  MODIFY `id_transaksi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_transaksi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_modal`
 --
 ALTER TABLE `tb_modal`
-  MODIFY `id_modal` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_modal` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
