@@ -1,55 +1,34 @@
-<h3>Edit Data Pelanggan</h3>
-<?php
-echo form_open('pelanggan/edit', ['class' => 'needs-validation', 'novalidate' => '']);
-?>
-<input type="hidden" name="id_pelanggan" value="<?php echo $record['id_pelanggan']; ?>">
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Data Pelanggan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Edit Data Pelanggan</h2>
+        <form action="<?= base_url('pelanggan/update/' . $pelanggan['id_pelanggan']); ?>" method="post">
             <div class="mb-3">
                 <label for="nama_pelanggan" class="form-label">Nama Pelanggan</label>
-                <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan"
-                    placeholder="Masukkan nama pelanggan" value="<?php echo $record['nama_pelanggan']; ?>" required>
-                <div class="invalid-feedback">
-                    Nama pelanggan harus diisi.
-                </div>
+                <input type="text" class="form-control" name="nama_pelanggan" value="<?= $pelanggan['nama_pelanggan']; ?>" required>
             </div>
             <div class="mb-3">
                 <label for="no_telepon" class="form-label">No Telepon</label>
-                <input type="text" class="form-control" id="no_telepon" name="no_telepon"
-                    placeholder="Masukkan no telepon" value="<?php echo $record['no_telepon']; ?>" required>
-                <div class="invalid-feedback">
-                    No telepon harus diisi.
-                </div>
+                <input type="text" class="form-control" name="no_telepon" value="<?= $pelanggan['no_telepon']; ?>" required>
             </div>
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
-                <input type="text" class="form-control" id="alamat" name="alamat"
-                    placeholder="Masukkan alamat" value="<?php echo $record['alamat']; ?>">
+                <textarea class="form-control" name="alamat" rows="3" required><?= $pelanggan['alamat']; ?></textarea>
             </div>
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <?php echo anchor('pelanggan', 'Kembali', ['class' => 'btn btn-secondary']); ?>
-            </div>
-        </div>
+            <button type="submit" class="btn btn-success">Update</button>
+            <a href="<?= base_url('pelanggan'); ?>" class="btn btn-secondary">Kembali</a>
+        </form>
     </div>
-</div>
-<?php echo form_close(); ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
-<script>
-    // Script untuk validasi Bootstrap
-    (function() {
-        'use strict';
-        var forms = document.querySelectorAll('.needs-validation');
-        Array.prototype.slice.call(forms)
-            .forEach(function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-    })();
-</script>
+</html>

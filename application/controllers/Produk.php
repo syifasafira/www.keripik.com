@@ -9,6 +9,16 @@ class Produk extends CI_Controller
         check_logged_in();
         $this->load->model('Model_produk');
     }
+    public function cetak_pdf()
+    {
+        $data['record'] = $this->Model_produk->get_all_produk(); // Ambil data produk dari model
+
+        // Load view khusus PDF
+        $html = $this->load->view('produk/pdf_data_produk', $data, true);
+
+        // Generate PDF menggunakan helper
+        generate_pdf($html, 'Data_Produk.pdf', true);
+    }
 
 
     public function index()

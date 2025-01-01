@@ -7,6 +7,13 @@ class modal extends CI_Controller
         check_logged_in();
         $this->load->model('model_modal');
     }
+    public function cetak_pdf()
+    {
+        $data['record'] = $this->model_modal->tampilkan_data();
+        $html = $this->load->view('modal/pdf_data_modal', $data, true);
+        generate_pdf($html, 'Data_Modal.pdf', true);
+    }
+
     function index()
     {
         $data['title'] = 'Data Modal';

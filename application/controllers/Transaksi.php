@@ -9,6 +9,17 @@ class Transaksi extends CI_Controller
         check_logged_in();
         $this->load->model('Model_transaksi');
     }
+    public function cetak_pdf()
+    {
+        $data['record'] = $this->Model_transaksi->get_all_transaksi(); // Ambil data transaksi dari database
+
+        // Load view khusus PDF
+        $html = $this->load->view('transaksi/pdf_data_transaksi', $data, true);
+
+        // Generate PDF menggunakan helper
+        generate_pdf($html, 'Data_Transaksi.pdf', true);
+    }
+
 
     public function index()
     {

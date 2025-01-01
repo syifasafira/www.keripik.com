@@ -1,12 +1,10 @@
 <h3 class="mb-4">Data Modal</h3>
 <div class="mb-3">
     <a href="<?php echo base_url('modal/tambah'); ?>" class="btn btn-primary">Tambah Data</a>
-    <button class="btn btn-danger">
+    <a class="btn btn-danger" href="<?= base_url('modal/cetak_pdf');
+                                    "" ?>">
         <i class="bi bi-file-earmark-pdf"></i> PDF
-    </button>
-    <button class="btn btn-success">
-        <i class="bi bi-file-earmark-excel"></i> Excel
-    </button>
+    </a>
 </div>
 <table class="table table-striped table-bordered">
     <thead class="table-dark">

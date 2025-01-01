@@ -1,39 +1,33 @@
 <?php
-class model_pelanggan extends CI_Model
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Model_pelanggan extends CI_Model
 {
-    function tampilkan_data()
+
+    public function get_all_pelanggan()
     {
-        return $this->db->get('tabel_pelanggan');
+        return $this->db->get('tabel_pelanggan')->result_array();
     }
-    function tambah()
+
+    public function add_pelanggan($data)
     {
-        $data = array(
-            'nama_pelanggan' => $this->input->post('nama_pelanggan'),
-            'no_telepon' => $this->input->post('no_telepon'),
-            'alamat' => $this->input->post('alamat')
-        );
-        $this->db->insert('tabel_pelanggan', $data);
+        return $this->db->insert('tabel_pelanggan', $data);
     }
-    function edit()
+
+    public function get_pelanggan_by_id($id)
     {
-        $id =  $this->input->post('id_pelanggan');
-        $data = array(
-            'nama_pelanggan' => $this->input->post('nama_pelanggan'),
-            'no_telepon' => $this->input->post('no_telepon'),
-            'alamat' => $this->input->post('alamat')
-        );
-        $this->db->where('id_pelanggan', $id);
-        $this->db->update('tabel_pelanggan', $data);
+        return $this->db->get_where('tabel_pelanggan', ['id_pelanggan' => $id])->row_array();
     }
-    function get_one($id)
-    {
-        $indeks =
-            array('id_pelanggan' => $id);
-        return $this->db->get_where('tabel_pelanggan', $indeks);
-    }
-    function delete($id)
+
+    public function update_pelanggan($id, $data)
     {
         $this->db->where('id_pelanggan', $id);
-        $this->db->delete('tabel_pelanggan');
+        return $this->db->update('tabel_pelanggan', $data);
+    }
+
+    public function delete_pelanggan($id)
+    {
+        $this->db->where('id_pelanggan', $id);
+        return $this->db->delete('tabel_pelanggan');
     }
 }

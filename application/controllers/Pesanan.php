@@ -9,6 +9,17 @@ class Pesanan extends CI_Controller
         check_logged_in();
         $this->load->model('Model_pesanan');
     }
+    public function cetak_pdf()
+    {
+        $data['record'] = $this->Model_pesanan->get_all_pesanan(); // Ambil data dari model
+
+        // Load view khusus PDF
+        $html = $this->load->view('pesanan/pdf_data_pesanan', $data, true);
+
+        // Generate PDF menggunakan helper
+        generate_pdf($html, 'Data_Pesanan.pdf', true);
+    }
+
 
     public function index()
     {
@@ -66,5 +77,10 @@ class Pesanan extends CI_Controller
         $this->load->view('templates/navbar', $data);
         $this->load->view('pesanan/form_edit', $data);
         $this->load->view('templates/footer');
+    }
+    public function delete($id)
+    {
+        $this->Model_pesanan->delete_pesanan($id);
+        redirect('pesanan');
     }
 }

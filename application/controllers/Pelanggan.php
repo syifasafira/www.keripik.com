@@ -1,54 +1,76 @@
 <?php
-class pelanggan extends CI_Controller
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Pelanggan extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
         check_logged_in();
-        $this->load->model('model_pelanggan');
+        $this->load->model('Model_pelanggan');
     }
 
-    function index()
+    public function index()
     {
         $data['title'] = 'Data Pelanggan';
-        $data['record'] = $this->model_pelanggan->tampilkan_data();
+        $data['pelanggan'] = $this->Model_pelanggan->get_all_pelanggan();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar', $data);
         $this->load->view('pelanggan/lihat_data', $data);
         $this->load->view('templates/footer');
     }
-    function tambah()
+
+    public function tambah()
     {
-        if (isset($_POST['submit'])) {
-            $this->model_pelanggan->tambah();
-            redirect('pelanggan');
-        } else {
-            $data['title'] = 'Tambah Data Pelanggan';
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/navbar', $data);
-            $this->load->view('pelanggan/form_input', $data);
-            $this->load->view('templates/footer');
-        }
+        $data['title'] = 'Tambah Data Pelanggan';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('pelanggan/form_input', $data);
+        $this->load->view('templates/footer');
     }
-    function edit()
+
+    public function add()
     {
-        if (isset($_POST['submit'])) {
-            $this->model_pelanggan->edit();
-            redirect('pelanggan');
-        } else {
-            $data['title'] = 'Edit Data Pelanggan';
-            $id = $this->uri->segment(3);
-            $data['record'] = $this->model_pelanggan->get_one($id)->row_array();
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/navbar', $data);
-            $this->load->view('pelanggan/form_edit', $data);
-            $this->load->view('templates/footer');
-        }
-    }
-    function delete()
-    {
-        $id = $this->uri->segment(3);
-        $this->model_pelanggan->delete($id);
+        $data = [
+            'nama_pelanggan' => $this->input->post('nama_pelanggan'),
+            'no_telepon' => $this->input->post('no_telepon'),
+            'alamat' => $this->input->post('alamat')
+        ];
+        $this->Model_pelanggan->add_pelanggan($data);
         redirect('pelanggan');
+    }
+
+    public function edit($id)
+    {
+        $data['title'] = 'Edit Data Pelanggan';
+        $data['pelanggan'] = $this->Model_pelanggan->get_pelanggan_by_id($id);
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('pelanggan/form_edit', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function update($id)
+    {
+        $data = [
+            'nama_pelanggan' => $this->input->post('nama_pelanggan'),
+            'no_telepon' => $this->input->post('no_telepon'),
+            'alamat' => $this->input->post('alamat')
+        ];
+        $this->Model_pelanggan->update_pelanggan($id, $data);
+        redirect('pelanggan');
+    }
+
+    public function delete($id)
+    {
+        $this->Model_pelanggan->delete_pelanggan($id);
+        redirect('pelanggan');
+    }
+    public function cetak_pdf()
+    {
+        $data['pelanggan'] = $this->Model_pelanggan->get_all_pelanggan();
+        $html = $this->load->view('pelanggan/pdf_data_pelanggan', $data, true);
+        generate_pdf($html, 'Data_Pelanggan.pdf');
     }
 }
